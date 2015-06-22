@@ -1,0 +1,21 @@
+.link(@before-arrow: false;
+      @after-arrow: false;
+      @font-color: #005aa0;
+      @font-size: 14px;
+      @decoration: none;) {
+  color: @font-color;
+  font-size: @font-size;
+  text-decoration: @decoration;
+  
+  & when (@before-arrow) {
+    &:before {
+      content: '→ ';
+    }
+  }
+    
+  & when (@after-arrow) {
+    &:after {
+      content: ' →';
+    }
+  }
+}

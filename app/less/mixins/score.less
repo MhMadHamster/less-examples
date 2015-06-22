@@ -1,0 +1,90 @@
+// Scores
+.score-mixin(@total: 100;
+             @medium-color: #55acee;
+             @bg-color: #cad9e2;
+             @size: 100px;
+             @good-color: false;
+             @border-width: 13px;) {
+
+  @one: 360 / @total;
+
+  .score-generator(@current) when (@current <= @total) {
+    .score-generator((@current + 1));
+    .score-@{current} {
+      .arc-start {
+        transform: rotate((unit(315 + (@one * @current), deg)));
+      }
+
+      & when (@current > (@total / 4)) and (@current <= (@total / 2)) {
+        .arc-start {
+          border-color: @medium-color transparent transparent @medium-color;
+        }
+      }
+
+      & when (@current > (@total / 2)) and (@current <= (@total / 4 * 3)) {
+        .arc-start {
+          border-color: @medium-color transparent @medium-color @medium-color;
+        }
+      }
+
+      & when (@current > (@total / 4 * 3)) and (@current < (@total / 10 * 9)) {
+        .arc-start {
+          border-color: @medium-color transparent @medium-color @medium-color;
+        }
+
+        .arc-end {
+          border-color: @medium-color transparent @medium-color transparent;
+          transform: rotate(45deg);
+        }
+      }
+
+      & when (@good-color = false) and (@current >= (@total / 10 * 9)) {
+        .arc-start {
+          border-color: @medium-color transparent @medium-color @medium-color;
+        }
+
+        .arc-end {
+          border-color: @medium-color transparent @medium-color transparent;
+          transform: rotate(45deg);
+        }
+      }
+      
+      & when (iscolor(@good-color)) and (@current >= (@total / 10 * 9)) {
+        .arc-start {
+          border-color: @good-color transparent @good-color @good-color;
+        }
+
+        .arc-end {
+          border-color: @good-color transparent @good-color transparent;
+          transform: rotate(45deg);
+        }
+      }
+    }
+  }
+
+  .score-generator(1);
+
+  .arc {
+    margin: 20px;
+    width: @size;
+    height: @size;
+    border-radius: 100%;
+    border: @border-width solid;
+    position: absolute;
+    display: block;
+    
+    &-bg {
+      border-color: @bg-color;
+    }
+    
+    &-start {
+      border-color: @medium-color transparent transparent transparent;
+    }
+    
+    &-end {
+      border-color: @bg-color transparent transparent transparent;
+      transform: rotate(-45deg);
+    }
+  }
+
+}

@@ -1,0 +1,12 @@
+#border {
+    .radius(@radius: 3px) { border-radius: @radius; }
+    .color(@color: #fc0) { border-color: @color; }
+    .style(@style: solid) { border-style: solid; }
+    .top(...) { border-top: @arguments; }
+    .left(...) { border-left: @arguments; }
+    .right(...) { border-right: @arguments; }
+    .bottom(...) { border-bottom: @arguments; }
+    .blueBig(@color: #4183D7; @width: 4px; @style: solid) {
+        border: @arguments;
+    }
+}
